@@ -1,13 +1,13 @@
-const PlatformzNew = artifacts.require("./PlatformzNew.sol");
+const SimpleBountyContract = artifacts.require("./SimpleBountyContract.sol");
 var assert = require('assert')
 let contractInstance;
 const Web3 = require('web3');
 
 //const accounts = getWeb3.eth.getAccounts();
 
-contract('PlatformzNew', (accounts) => {
+contract('SimpleBountyContract', (accounts) => {
    beforeEach(async () => {
-      contractInstance = await PlatformzNew.deployed()
+      contractInstance = await SimpleBountyContract.deployed()
    })
 
    it('Contract deployer becomes owner', async () => {
