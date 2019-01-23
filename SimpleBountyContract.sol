@@ -2,9 +2,9 @@ pragma solidity ^0.5.0;
 
 
 // @author Filip Sundgren
-// @title Platform Z Simple Demo Contract
+// @title Simple Demo Contract
 
-contract PlatformzNew {
+contract SimpleBountyContract {
 
 
     /**
@@ -18,13 +18,12 @@ contract PlatformzNew {
     uint public stepCount;
     bool public contractActive;
     uint public timeStep;
+    bool public hasStarted;
 
     AcceptedSteps public acceptedSteps;
 
-    //mapping(address => uint) public balances;
     mapping(address => Developer) public developers;
     mapping (address => bool) public isAdmin;
-
 
     address[] public developersList;
     uint[] public weightNumberChecker;
@@ -153,8 +152,7 @@ contract PlatformzNew {
     }
 
 
-    //@dev Platform Z will become the creator upon contract deployment
-    //@param _owner will become the owner and should hence be the contractor
+    //@dev Deployer's address will become owner
     constructor() public {
         owner = msg.sender;
         isAdmin[owner] = true;
@@ -162,16 +160,12 @@ contract PlatformzNew {
 
     /**
      *
-     * @dev timeContract är antal veckor kontrakt ska pågå. En vecka ligger hårdkodat som unix time.
-     * - man måste skicka in pengar i kontraktet här.
-     * - developers måste vara tillagda innan start.
-     * - varje steg har deadline en fjärdedel av totala tiden. T ex: Om 4 veckor anges kommer varje step
-     * ha 1 veckas tid.
-     *
+     * @dev need to transfer value at this step, which will be the value of your project.
+     * @dev Developers need to be inserted before start, and the total weight (reward) for devs must be 100% of contract's amount.
+     * @param timeContract is total weeks that's hardcoded as unix seconds on line 17.
      * @return success true
      *
      */
-
     function startWork(uint timeContract) public payable onlyAdmin returns (bool success) {
         checkWeight();
         require(developersList.length > 0, "You must add at least one developer before starting");
@@ -185,11 +179,12 @@ contract PlatformzNew {
         contractEndTime = (timeContract * oneWeek) + now;
         timeStep = (timeContract * oneWeek) / 4;
         emit LogContractEndsAt(contractEndTime);
+        hasStarted = true;
         return true;
         }
 
-    //require reward to be even and everything to add up to 100%
-    //Sätt in alla grejer på en rad likt supplychain
+
+    // @dev require reward to be even and everything to add up to 100%
     function addDeveloper(address developer, uint reward) public onlyAdmin onlyBeforeWeight {
         require(contractActive == false, "Cannot add developer after contract has started");
         require(developers[developer].isDeveloper == false, "Is already developer");
@@ -200,18 +195,15 @@ contract PlatformzNew {
         emit LogDeveloperAdded(developer, reward);
     }
 
-    //objekt kvar i lista även fast borttaget (man nollar bara allt, tror ej man kan ta bort)
+
     function numberOfDevs() public view returns (uint numberOfDevelopers) {
         return developersList.length;
     }
 
-    /*
-    function getDevInfo(uint _devz) public view returns(address) {
-        require(isAdmin[msg.sender] || msg.sender == developersList[_devz]);
-        return developersList[_devz];
-    }*/
-
-
+    
+    /**
+     * @dev Owner accepts step when necessary and stepCount will increase by one (stepCount +1).
+     */
     function stepAccept() public onlyAdmin isActive {
         require(stepCount < 5);
         if (stepCount == 0) {
@@ -251,6 +243,11 @@ contract PlatformzNew {
             }
         }
     }
+    
+    /**
+     * @dev Developers can here withdraw their earnings. For each accepted step, they can take out their weight (decided by the
+     *      owner) / 4 (since there are 4 hard coded steps).
+     */
 
    function withdrawal() public onlyDeveloper(msg.sender) isActive {
        uint weight = developers[msg.sender].weight;
@@ -277,7 +274,8 @@ contract PlatformzNew {
         }
     }
 
-    /// @dev The Owner can add an additional admin
+
+    /// @dev The Owner can add an additional address to have admin status. Cannot be developer.
     function addAdmin(address _admin) public onlyAdmin {
         require(isAdmin[_admin] == false);
         require(developers[_admin].isDeveloper == false);
@@ -291,6 +289,9 @@ contract PlatformzNew {
      * Admin tools
      */
 
+     /**
+     * @dev Checks current weight of project. Needs to add up to 100 before contract can start.
+     */
     function checkWeight() internal {
         uint k = 0;
         for(uint i=0; i < weightNumberChecker.length; i++){
@@ -305,6 +306,10 @@ contract PlatformzNew {
     }
 
 
+    /**
+     * @dev Remove single dev from list. Can only be done if contract hasn't yet started, or is paused.
+     * @param Address of developer, and it's place in developersList need to be the same. Used as a control mechanism.
+     */
     function removeSingleDev(address devAddress, uint devInList) public onlyAdmin {
         require(developersList[devInList] == devAddress, "addresses doesn't match");
         delete developersList[devInList];
@@ -323,6 +328,9 @@ contract PlatformzNew {
             admins[i] = admins[admins.length - 1];
     }
 
+
+    // @dev Decided to abandon this function due to many security issues. Would be nice feature, but a bit unnecessary when you
+    //      also can delete single devs and insert them again.
     /*
     function changeDevWeight(address devAddress, uint newWeight) public onlyAdmin {
         require(contractActive == false, "contract must be paused for this function");
@@ -332,7 +340,8 @@ contract PlatformzNew {
 
 
     /**
-     * @dev Extend the deadline. Will prolong Step 4, implying one cannot make this call after Step 3.
+     * @dev Extend the deadline. Will prolong whole contract and can't be made after Step 3. 
+     * @dev Unnecessary function for such a simple contract?
      * @param newTime is the number of weeks the new time will be extended with.
      **/
     function extendDeadline(uint newTime) public onlyAdmin {
@@ -343,29 +352,40 @@ contract PlatformzNew {
         timeStep = contractEndTime / 4;
         emit LogDeadlineExtended(newDeadline);
     }
-
+    
+    
+    /**
+     * @dev Security switch with both On and Off functions. Have some concerns for resumeContract() and its efficiency, both having contractActive(bool) and hasStarted(bool). 
+     * @dev Unnecessary function for such a simple contract?
+     * @param newTime is the number of weeks the new time will be extended with.
+     **/
     function pauseContract() public onlyOwner isActive { //make internal
         contractActive = false;
         emit LogPauseContract(true);
     }
 
     function resumeContract() public onlyOwner {
-        require(contractActive == false);
+        require(contractActive == false && hasStarted == false);
         contractActive = true;
         emit LogResumeContract(false);
     }
 
-    //sätt in nånstans
+    // This one needs to find a place and is not used today. Control mechanism, but where would it fit best? Want a nice finish for my contract.
     function deadlinePassed() internal {
         require(now > contractEndTime);
         selfdestruct(owner);
     }
 
+    /**
+     * @dev If Owner wants to cancel the whole job and return his funds. Dangerous to combine with require(contractActive == false)?
+     * @param newTime is the number of weeks the new time will be extended with.
+     **/
     function contractKill() public onlyOwner {
         require(contractActive == false, "pause contract before making this call");
         selfdestruct(owner);
     }
 
+    // Fallback function. 
     function()external payable {
         require(msg.data.length == 0);
         emit LogDepositReceived(msg.sender);
