@@ -9,7 +9,7 @@ The contract is constituted out of four steps, together with a total deadline. T
 
 This is indeed a simple bounty contract. I did not aim to copy any other bounty contracts during the creation of this contract, as I wanted to find my own logic and get an understanding of the business purposes. Any similarities with other bounty contracts may appear for obvious reasons, but if so - they are entirely coincedental.
 
-### :bangbang: Considerations:
+### :bangbang: Important remarks:
 
 * The contract has been constructed from a companies point of view and its presumed that the developers are successful in their job. The real incentives will disappear for the working developers as soon as they miss or fail a step and hance a quarter payment. 
 
