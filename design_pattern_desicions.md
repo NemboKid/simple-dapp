@@ -8,6 +8,7 @@ To understand my reasoning, please read my explaining points below:
 - It would increase the complexity of the contract and its readability, which is opposed to my purpose.
 - A considerable potential of flaws and can introduce bugs, as has been seen many times. It's a topic still under heavy research and is still considered very experimental.
 - The created contract is constructed for small short term projects.
+- For more details, I can recommend https://blog.trailofbits.com/2018/09/05/contract-upgrade-anti-patterns/
 
 
 **Number of Steps and Time Limit**
