@@ -1,7 +1,7 @@
 # simple-dapp
 
 
-## Contract purpose and overview
+## :computer: Contract purpose and overview
 
 This contract could be used and included on platforms such as Fiverr.com, Freelancer.com, Gitcoin.co, or other Project Based Websites where there's one Issuer and one Worker. With a smart contract setup, work can be performed entirely online and the Issuer/Project Owner can control the quality and his payments all the time. The Worker/Developer, on the other hand, will only get paid if he satifies the requirements that was stated from the Issuer on the hypothetical website, where other similar projects are listed as well. 
 
@@ -9,7 +9,8 @@ The contract is constituted out of four steps, together with a total deadline. T
 
 This is indeed a simple bounty contract. I did not aim to copy any other bounty contracts during the creation of this contract, as I wanted to find my own logic and get an understanding of the business purposes. Any similarities with other bounty contracts may appear for obvious reasons, but if so - they are entirely coincedental.
 
-### Considerations: 
+### :bangbang: Considerations:
+
 * The contract has been constructed from a companies point of view and its presumed that the developers are successful in their job. The real incentives will disappear for the working developers as soon as they miss or fail a step and hance a quarter payment. 
 
 * The maximum time is set to 52 weeks, which is a bit long given the four hard coded steps. This contract is more suitable for smaller gigs not requiring too big payments. 
@@ -17,7 +18,7 @@ This is indeed a simple bounty contract. I did not aim to copy any other bounty 
 * This project should be perceived as very experimental and is for educational purposes only. 
 
 
-### Contract Structure
+### :memo: Contract Structure
 
 The contract includes three different roles: i) owner, ii) developer and iii) admin. They serve different purposes which will be explained in greater detail below.
 
