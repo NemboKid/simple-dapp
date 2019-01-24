@@ -11,6 +11,7 @@ To understand my reasoning, please read my explaining points below:
 
 
 **Number of Steps and Time Limit**
+
 I chose to only let the contract maximal run for 10 weeks (8 weeks normal, then an extention can be made with 2 additional weeks). 
 At first I had it for one year, but I want my contract to be simple and not to include too much money and hence be big working operations. 
 As the contract is hard coded and only consists of a number of weeks (1-8, with an extention of 2 weeks),
@@ -21,6 +22,7 @@ together with careful Github interaction and controlling structures for pull req
 
 
 **Roles**
+
 The contract is designed from a company's point of view and I made this role extremelly powerful with purpose. The four steps are there to protect both the owner and the developers,
 where the never needs to accept if he doesn't like the result. At the same time, if the first step isn't accepted, the developers will not continue to work since the owner is i) disatisfied or ii) not serious.
 In accordance to what I wrote under "Number of Steps and Time Limit", smaller steps could increase the feeling of security for both developers and the owner. However, I wanted to 
