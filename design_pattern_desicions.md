@@ -40,9 +40,27 @@ I wanted to have the contract as automated as possible, but due to the security 
 
 
 
-**Fallback function**
+**Fallback Function**
 
 The fallback function is there to pick up any potential calls containing ether that doesn't match any function in the contract. Also checks that the data is empty and therefore only logs when ether is received. This is because users will notice the difference when calling functions that works and functions that don't work.
+
+
+**Circuit Breaker**
+pauseContract() and resumeContract() are used as the circuit breaker and is used in tandem with the modifier onlyAdmin.
+This functionality should be used in tandem with Ownable so that only the contract owner can pause/unpause the app. This is useful for buying time in dire situations and analyzing what went wrong and how to fix it. 
+
+
+
+**Some Notes about the Sovereignity of the Owner**
+First I thought about having a company that maintains a platform to publish small projects, where developers can pick them up and earn ether, like Gitcoin, and that this company would be the deployer of the smart contract and hence maintain it and overview its security. The hypothetical "Platform Company" would then deploy and insert the owner's address (the company who orders the project) and handle this service for them. However, this would be too centralized and the smart contract lost much of its sense and the reason of using a smart contract approach was almost gone. Because of that, I assumed that this project and contract must be deployed and handled all the way by the company and project owner (Owner), and it's assumed this entitity is technical and knows what he is doing.
+
+It could be argued that one common and potential attack scenario exists within the circuit breaker, where the Owner can pause the contract and refuse to resume it if the developers don't pay him on the side. In the case of this contract, however, the Owner must have all the power and the steps are created to protect the two entities from each other and discentivise them from not acting honest. 
+
+If the Owner wants to perform an attack after step 2, he can do so but then the Developers will probably leave and don't need to continue with the work. The biggest risk, from the Developers point of view, is before Step 1. The Developers can do a great job and deliver code that the Owner is happy with. The Owner takes it, but doesn't accept the step. This will mean he gets the first code delivery, whereas the Developers don't receive money. This will always be the case, the Developers risk 1/4 of their money at all times if the Owner won't accept a step. Either beacuse he doesn't like the work, or for any other reason don't want to pay out his money. 
+
+Any malicious acting from any party will have the consequence of failed work performance and a product will never emerge. This is how it also works in the real world. If we assume this a contract like this is implemented on Gitcoin or any other similar platform, a ranking or reputation system can be used on the side in order to promote good behavor and vice versa. 
+
+
 
 
 
