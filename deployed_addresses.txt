@@ -1,0 +1,3 @@
+The contracts are deployed and live on the Ropsten network.
+
+They have the addresses:
