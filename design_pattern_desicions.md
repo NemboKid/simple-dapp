@@ -1,6 +1,7 @@
 ### Design Pattern and Security Considerations
 
 **Upgradability**
+
 I actively chose not to include any of the two upgradability patterns (Data Separation and Delegatecall-based proxies). 
 To understand my reasoning, please read my explaining points below:
 
@@ -30,4 +31,19 @@ In accordance to what I wrote under "Number of Steps and Time Limit", smaller st
 build a very easy project that's intiutive and with hard coded steps. One improvement could be that the owner can choose number of steps and also the time for them, but I chose to 
 make a short term contract for simplicity reasons. With an increased number of steps, the owner, who's perhaps not very technical, would need to 
 interact with the contract more often, increasing both cost in terms of gas usage as well as complexity.
+
+
+
+**Withdrawals**
+
+I wanted to have the contract as automated as possible, but due to the security concerns with push payments for external calls, developers will have to withdraw their money by themselves through pull payments. 
+
+
+
+**Fallback function**
+
+The fallback function is there to pick up any potential calls containing ether that doesn't match any function in the contract. Also checks that the data is empty and therefore only logs when ether is received. This is because users will notice the difference when calling functions that works and functions that don't work.
+
+
+
 
