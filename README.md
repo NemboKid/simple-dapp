@@ -52,4 +52,9 @@ Versions used:
 - MacOS 10.14 (Mojave)
 
 
-
+**Instructions for setting up everything:**
+1) Clone this repo
+2) Start ganache-cli in terminal
+3) From the terminal, in the client folder inside the project, type `npm run start`. This should start the server on http://localhost:3000/
+4) In the project folder, type `truffle migrate`, could also be done with the flag `--reset`
+5) On localhost:3000, start interact with the contract through Metamask. Make sure to import the seed words you got from `ganache-cli`
