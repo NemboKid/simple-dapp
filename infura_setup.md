@@ -1,7 +1,7 @@
 Replace the content in `truffle-config.js` with:
 
 
-'''
+```
 var HDWalletProvider = require("truffle-hdwallet-provider");
 const MNEMONIC = 'YOUR WALLET KEY';
 
@@ -22,7 +22,7 @@ module.exports = {
   }
 };
 
-'''
+```
 
 In the `getWeb3.js`, replace the line `const web3 = new Web3(window.ethereum);` with `const web3 = new Web3(new Web3.providers.HttpProvider(
     'https://ropsten.infura.io/[YOUR_API_KEY]`
