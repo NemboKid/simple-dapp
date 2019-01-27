@@ -43,7 +43,7 @@ An Admin can be added by the Owner in order to maintain the contract and reduce 
 
 Everything is done with Truffle and React, following the exact same methods as we saw in the video lesson "Integrating With React". The command for setting up the React environment is `truffle unbox react`. I have used Ganache client for all development and port 8545 (as can be found in `truffle-config.js`). 
 
-Versions used: 
+Versions: 
 - React: 16.7.0
 - Web3: 1.0.0-beta.35
 - Truffle: v5.0.0-next.17 (core: 5.0.0-beta.1)
