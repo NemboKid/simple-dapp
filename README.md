@@ -13,7 +13,7 @@ This is indeed a simple bounty contract. I did not aim to copy any other bounty 
 
 ### :bangbang: Important remarks:
 
-* The contract has been constructed from a companies point of view and its presumed that the developers are successful in their job. The real incentives will disappear for the working developers as soon as they miss or fail a step and hance a quarter payment. 
+* The contract has been constructed from a company's point of view and its presumed that the developers are successful in their job. The real incentives will disappear for the working developers as soon as they miss or fail a step and hance a quarter payment. 
 
 * The maximum time is set to 52 weeks, which is a bit long given the four hard coded steps. This contract is more suitable for smaller gigs not requiring too big payments. 
 
