@@ -38,3 +38,18 @@ As described above, the owner will have to include at least one developer to wor
 **3)Admin**
 An Admin can be added by the Owner in order to maintain the contract and reduce the workforce, if necessary. There are both pros and cons with adding an admin to the project. While giving up some of the power, it can at the same time be great to have an extra hand and someone else that can accept a step.
 
+
+### Requirements and Evaluation
+
+Everything is done with Truffle and React, following the exact same methods as we saw in the video lesson "Integrating With React". The command for setting up the React environment is `truffle unbox react`. I have used Ganache client for all development and port 8545 (as can be found in `truffle-config.js`). 
+
+Versions used: 
+- React: 16.7.0
+- Web3: 1.0.0-beta.35
+- Truffle: v5.0.0-next.17 (core: 5.0.0-beta.1)
+- Solidity: v0.5.0 (solc-js)
+- Node: v10.6.0
+- MacOS 10.14 (Mojave)
+
+
+
