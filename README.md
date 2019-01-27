@@ -58,3 +58,7 @@ Versions:
 3) From the terminal, in the client folder inside the project, type `npm run start`. This should start the server on http://localhost:3000/
 4) In the project folder, type `truffle migrate`, could also be done with the flag `--reset`
 5) On localhost:3000, start interact with the contract through Metamask. Make sure to import the seed words you got from `ganache-cli`
+
+
+**Ropsten Testnet**
+The project is deployed to the Ropsten Testnet (Infura). Check the file deployed_addresses.txt to see the addresses. Also see infura_setup.md to see what changes to make if you want to interact with the frontend when it's on Ropsten.e
