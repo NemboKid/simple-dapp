@@ -11,7 +11,7 @@ This is indeed a simple bounty contract. I did not aim to copy any other bounty 
 
 **Contract prerequisities:** The project should have a small and easy scope. The work performed must be digital and presented to the contract's owner before each step's deadline. The purpose of the whole contract is that people should be able to work remotely, and the use of Github, Trello, Appear.in and other resources may come in handy. It's assumed that the developers and the owner have a strong communication and help each other.
 
-### :bangbang: Important remarks:
+### Important remarks:
 
 * The contract has been constructed from a company's point of view and its presumed that the developers are successful in their job. The real incentives will disappear for the working developers as soon as they miss or fail a step and hance a quarter payment. 
 
